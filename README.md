@@ -24,15 +24,19 @@
     <a href="https://www.open-notebook.ai"><strong>Checkout our website »</strong></a>
     <br />
     <br />
-    <a href="docs/getting-started/index.md">📚 Get Started</a>
+    <a href="docs/0-START-HERE/index.md">📚 Get Started</a>
     ·
-    <a href="docs/user-guide/index.md">📖 User Guide</a>
+    <a href="docs/3-USER-GUIDE/index.md">📖 User Guide</a>
     ·
-    <a href="docs/features/index.md">✨ Features</a>
+    <a href="docs/2-CORE-CONCEPTS/index.md">✨ Features</a>
     ·
-    <a href="docs/deployment/index.md">🚀 Deploy</a>
+    <a href="docs/1-INSTALLATION/index.md">🚀 Deploy</a>
   </p>
 </div>
+
+<p align="center">
+<a href="https://trendshift.io/repositories/14536" target="_blank"><img src="https://trendshift.io/api/badge/repositories/14536" alt="lfnovo%2Fopen-notebook | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+</p>
 
 <div align="center">
   <!-- Keep these links. Translations will automatically update with the README. -->
@@ -64,19 +68,6 @@ Learn more about our project at [https://www.open-notebook.ai](https://www.open-
 
 ---
 
-## ⚠️ IMPORTANT: v1.0 Breaking Changes
-
-**If you're upgrading from a previous version**, please note:
-
-- 🏷️ **Docker tags have changed**: The `latest` tag is now **frozen** at the last Streamlit version
-- 🆕 **Use `v1-latest` tag** for the new React/Next.js version (recommended)
-- 🔌 **Port 5055 required**: You must expose port 5055 for the API to work
-- 📖 **Read the migration guide**: See [MIGRATION.md](MIGRATION.md) for detailed upgrade instructions
-
-**New users**: You can ignore this notice and proceed with the Quick Start below using the `v1-latest-single` tag.
-
----
-
 ## 🆚 Open Notebook vs Google Notebook LM
 
 | Feature | Open Notebook | Google Notebook LM | Advantage |
@@ -84,13 +75,12 @@ Learn more about our project at [https://www.open-notebook.ai](https://www.open-
 | **Privacy & Control** | Self-hosted, your data | Google cloud only | Complete data sovereignty |
 | **AI Provider Choice** | 16+ providers (OpenAI, Anthropic, Ollama, LM Studio, etc.) | Google models only | Flexibility and cost optimization |
 | **Podcast Speakers** | 1-4 speakers with custom profiles | 2 speakers only | Extreme flexibility |
-| **Context Control** | 3 granular levels | All-or-nothing | Privacy and performance tuning |
 | **Content Transformations** | Custom and built-in | Limited options | Unlimited processing power |
 | **API Access** | Full REST API | No API | Complete automation |
 | **Deployment** | Docker, cloud, or local | Google hosted only | Deploy anywhere |
-| **Citations** | Comprehensive with sources | Basic references | Research integrity |
+| **Citations** | Basic references (will improve) | Comprehensive with sources | Research integrity |
 | **Customization** | Open source, fully customizable | Closed system | Unlimited extensibility |
-| **Cost** | Pay only for AI usage | Monthly subscription + usage | Transparent and controllable |
+| **Cost** | Pay only for AI usage | Free tier + Monthly subscription | Transparent and controllable |
 
 **Why Choose Open Notebook?**
 - 🔒 **Privacy First**: Your sensitive research stays completely private
@@ -105,62 +95,58 @@ Learn more about our project at [https://www.open-notebook.ai](https://www.open-
 
 ## 🚀 Quick Start
 
-**Docker Images Available:**
-- **Docker Hub**: `lfnovo/open_notebook:v1-latest-single`
-- **GitHub Container Registry**: `ghcr.io/lfnovo/open-notebook:v1-latest-single`
+Choose your installation method:
 
-Both registries contain identical images - choose whichever you prefer!
+### 🐳 **Docker (Recommended)**
 
-Ready to try Open Notebook? Choose your preferred method:
+**Best for most users** - Fast setup with Docker Compose:
 
-### ⚡ Instant Setup (Recommended)
+→ **[Docker Compose Installation Guide](docs/1-INSTALLATION/docker-compose.md)**
+- Multi-container setup (recommended)
+- 5-10 minutes setup time
+- Requires Docker Desktop
+
+**Quick Start:**
+- Get an API key (OpenAI, Anthropic, Google, etc.) or setup Ollama
+- Create docker-compose.yml (example in guide)
+- Run: docker compose up -d
+- Access: http://localhost:8502
+
+---
+
+### 💻 **From Source (Developers)**
+
+**For development and contributors:**
+
+→ **[From Source Installation Guide](docs/1-INSTALLATION/from-source.md)**
+- Clone and run locally
+- 10-15 minutes setup time
+- Requires: Python 3.11+, Node.js 18+, Docker, uv
+
+**Quick Start:**
 ```bash
-# Create a new directory for your Open Notebook installation
-mkdir open-notebook
-cd open-notebook
-
-# Using Docker - Get started in 2 minutes
-docker run -d \
-  --name open-notebook \
-  -p 8502:8502 -p 5055:5055 \
-  -v ./notebook_data:/app/data \
-  -v ./surreal_data:/mydata \
-  -e OPENAI_API_KEY=your_key \
-  lfnovo/open_notebook:v1-latest-single
-
-# Or use GitHub Container Registry:
-# ghcr.io/lfnovo/open-notebook:v1-latest-single
-```
-
-**What gets created:**
-```
-open-notebook/
-├── notebook_data/     # Your notebooks and research content
-└── surreal_data/      # Database files
-```
-
-**Access your installation:**
-- **🖥️ Main Interface**: http://localhost:8502 (Next.js UI)
-- **🔧 API Access**: http://localhost:5055 (REST API)
-- **📚 API Documentation**: http://localhost:5055/docs (Interactive Swagger UI)
-
-> **⚠️ Important**: 
-> 1. **Run from a dedicated folder**: Create and run this from inside a new `open-notebook` folder so your data volumes are properly organized
-> 2. **Volume persistence**: The volumes (`-v ./notebook_data:/app/data` and `-v ./surreal_data:/mydata`) are essential to persist your data between container restarts. Without them, you'll lose all your notebooks and research when the container stops.
-
-### 🛠️ Full Installation
-For development or customization:
-```bash
-git clone https://github.com/lfnovo/open-notebook
-cd open-notebook
+git clone https://github.com/lfnovo/open-notebook.git
+uv sync
 make start-all
 ```
 
+Access: http://localhost:3000 (dev) or http://localhost:8502 (production)
+
+---
+
 ### 📖 Need Help?
-- **🤖 AI Installation Assistant**: We have a [CustomGPT built to help you install Open Notebook](https://chatgpt.com/g/g-68776e2765b48191bd1bae3f30212631-open-notebook-installation-assistant) - it will guide you through each step!
-- **New to Open Notebook?** Start with our [Getting Started Guide](docs/getting-started/index.md)
-- **Need installation help?** Check our [Installation Guide](docs/getting-started/installation.md)
-- **Want to see it in action?** Try our [Quick Start Tutorial](docs/getting-started/quick-start.md)
+
+- **🤖 AI Installation Assistant**: [CustomGPT to help you install](https://chatgpt.com/g/g-68776e2765b48191bd1bae3f30212631-open-notebook-installation-assistant)
+- **🆘 Troubleshooting**: [5-minute troubleshooting guide](docs/6-TROUBLESHOOTING/quick-fixes.md)
+- **💬 Community Support**: [Discord Server](https://discord.gg/37XJPXfz2w)
+- **🐛 Report Issues**: [GitHub Issues](https://github.com/lfnovo/open-notebook/issues)
+
+---
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=lfnovo/open-notebook&type=date&legend=top-left)](https://www.star-history.com/#lfnovo/open-notebook&type=date&legend=top-left)
+
 
 ## Provider Support Matrix
 
@@ -206,36 +192,35 @@ Thanks to the [Esperanto](https://github.com/lfnovo/esperanto) library, we suppo
 - **📊 Fine-Grained Context Control**: Choose exactly what to share with AI models
 - **📎 Citations**: Get answers with proper source citations
 
-### Three-Column Interface
-1. **Sources**: Manage all your research materials
-2. **Notes**: Create manual or AI-generated notes
-3. **Chat**: Converse with AI using your content as context
+
+## Podcast Feature
 
 [![Check out our podcast sample](https://img.youtube.com/vi/D-760MlGwaI/0.jpg)](https://www.youtube.com/watch?v=D-760MlGwaI)
 
 ## 📚 Documentation
 
 ### Getting Started
-- **[📖 Introduction](docs/getting-started/introduction.md)** - Learn what Open Notebook offers
-- **[⚡ Quick Start](docs/getting-started/quick-start.md)** - Get up and running in 5 minutes
-- **[🔧 Installation](docs/getting-started/installation.md)** - Comprehensive setup guide
-- **[🎯 Your First Notebook](docs/getting-started/first-notebook.md)** - Step-by-step tutorial
+- **[📖 Introduction](docs/0-START-HERE/index.md)** - Learn what Open Notebook offers
+- **[⚡ Quick Start](docs/0-START-HERE/quick-start.md)** - Get up and running in 5 minutes
+- **[🔧 Installation](docs/1-INSTALLATION/index.md)** - Comprehensive setup guide
+- **[🎯 Your First Notebook](docs/0-START-HERE/first-notebook.md)** - Step-by-step tutorial
 
 ### User Guide
-- **[📱 Interface Overview](docs/user-guide/interface-overview.md)** - Understanding the layout
-- **[📚 Notebooks](docs/user-guide/notebooks.md)** - Organizing your research
-- **[📄 Sources](docs/user-guide/sources.md)** - Managing content types
-- **[📝 Notes](docs/user-guide/notes.md)** - Creating and managing notes
-- **[💬 Chat](docs/user-guide/chat.md)** - AI conversations
-- **[🔍 Search](docs/user-guide/search.md)** - Finding information
+- **[📱 Interface Overview](docs/3-USER-GUIDE/interface-overview.md)** - Understanding the layout
+- **[📚 Notebooks](docs/3-USER-GUIDE/notebooks.md)** - Organizing your research
+- **[📄 Sources](docs/3-USER-GUIDE/sources.md)** - Managing content types
+- **[📝 Notes](docs/3-USER-GUIDE/notes.md)** - Creating and managing notes
+- **[💬 Chat](docs/3-USER-GUIDE/chat.md)** - AI conversations
+- **[🔍 Search](docs/3-USER-GUIDE/search.md)** - Finding information
 
 ### Advanced Topics
-- **[🎙️ Podcast Generation](docs/features/podcasts.md)** - Create professional podcasts
-- **[🔧 Content Transformations](docs/features/transformations.md)** - Customize content processing
-- **[🤖 AI Models](docs/features/ai-models.md)** - AI model configuration
-- **[🔧 REST API Reference](docs/development/api-reference.md)** - Complete API documentation
-- **[🔐 Security](docs/deployment/security.md)** - Password protection and privacy
-- **[🚀 Deployment](docs/deployment/index.md)** - Complete deployment guides for all scenarios
+- **[🎙️ Podcast Generation](docs/2-CORE-CONCEPTS/podcasts.md)** - Create professional podcasts
+- **[🔧 Content Transformations](docs/2-CORE-CONCEPTS/transformations.md)** - Customize content processing
+- **[🤖 AI Models](docs/4-AI-PROVIDERS/index.md)** - AI model configuration
+- **[🔌 MCP Integration](docs/5-CONFIGURATION/mcp-integration.md)** - Connect with Claude Desktop, VS Code and other MCP clients
+- **[🔧 REST API Reference](docs/7-DEVELOPMENT/api-reference.md)** - Complete API documentation
+- **[🔐 Security](docs/5-CONFIGURATION/security.md)** - Password protection and privacy
+- **[🚀 Deployment](docs/1-INSTALLATION/index.md)** - Complete deployment guides for all scenarios
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -260,6 +245,12 @@ See the [open issues](https://github.com/lfnovo/open-notebook/issues) for a full
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+## 📖 Need Help?
+- **🤖 AI Installation Assistant**: We have a [CustomGPT built to help you install Open Notebook](https://chatgpt.com/g/g-68776e2765b48191bd1bae3f30212631-open-notebook-installation-assistant) - it will guide you through each step!
+- **New to Open Notebook?** Start with our [Getting Started Guide](docs/0-START-HERE/index.md)
+- **Need installation help?** Check our [Installation Guide](docs/1-INSTALLATION/index.md)
+- **Want to see it in action?** Try our [Quick Start Tutorial](docs/0-START-HERE/quick-start.md)
 
 ## 🤝 Community & Contributing
 
@@ -287,24 +278,11 @@ See our [Contributing Guide](CONTRIBUTING.md) for detailed information on how to
 
 Open Notebook is MIT licensed. See the [LICENSE](LICENSE) file for details.
 
-## 📞 Contact
-
-**Luis Novo** - [@lfnovo](https://twitter.com/lfnovo)
 
 **Community Support**:
 - 💬 [Discord Server](https://discord.gg/37XJPXfz2w) - Get help, share ideas, and connect with users
 - 🐛 [GitHub Issues](https://github.com/lfnovo/open-notebook/issues) - Report bugs and request features
 - 🌐 [Website](https://www.open-notebook.ai) - Learn more about the project
-
-## 🙏 Acknowledgments
-
-Open Notebook is built on the shoulders of amazing open-source projects:
-
-* **[Podcast Creator](https://github.com/lfnovo/podcast-creator)** - Advanced podcast generation capabilities
-* **[Surreal Commands](https://github.com/lfnovo/surreal-commands)** - Background job processing
-* **[Content Core](https://github.com/lfnovo/content-core)** - Content processing and management
-* **[Esperanto](https://github.com/lfnovo/esperanto)** - Multi-provider AI model abstraction
-* **[Docling](https://github.com/docling-project/docling)** - Document processing and parsing
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
